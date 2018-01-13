@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+  </head>
+  <body ng-app ng-init="name='World'">
+    <div ng-controller="HelloCtrl">
+      Say hello to: <input type="text" ng-model="$parent.name">
+      <h1>Hello, {{getName()}}!</h1>
+    </div>
+
+    <div id="countries">
+        <ul ng-controller="WorldCountries">
+          <li ng-repeat="country in countries">
+            {{country.name}} has population of {{country.population}},
+            {{worldsPercentage(country.population)}} % of the World's population.
+          </li>
+          <hr>
+          World's population: {{7000}} millions
+        </ul>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    var HelloCtrl = function($scope) {
+      $scope.getName = function() {
+        return $scope.name;
+      };
+    };
+
+    var WorldCountries = function($scope) {
+      $scope.population = 7000;
+      $scope.countries = [
+        {name: 'France', population: 63.1},
+        {name: 'United Kingdom', population: 61.8}
+      ];
+      $scope.worldsPercentage = function(countryPopulation) {
+        return (countryPopulation / $scope.population) * 100;
+      }
+    }
+  </script>
+</html>
